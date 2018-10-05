@@ -1,0 +1,13 @@
+CHANGELOG.md
+MIT-license.txt
+Makefile
+README.md
+boilerplate.html
+*.scss
+embedded_sagecell.js
+extensions/*
+fonts/
+introduction/
+sagecelltest.html
+test/
+themes/*
