@@ -428,3 +428,6 @@ a:hover, a:focus {
 .sagecell_poweredBy a:first-of-type {
   display: none;
 }
+ul li {
+  list-style: none;
+}
