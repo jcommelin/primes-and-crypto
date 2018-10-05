@@ -6,7 +6,6 @@ boilerplate.html
 *.scss
 embedded_sagecell.js
 extensions/*
-fonts/
 introduction/
 sagecelltest.html
 test/
