@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=1024, user-scalable=no">
+
+<title>Mathetage 2018</title>
+
+<!-- Required stylesheet -->
+<link rel="stylesheet" media="screen" href="core/deck.core.css">
+
+<!-- Extension CSS files go here. Remove or add as needed. -->
+<link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+<link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+
+<!-- Style theme. More available in /themes/style/ or create your own. -->
+<!-- <link rel="stylesheet" href="http://imakewebthings.com/deck.js/css/common.css"> -->
+<!-- <link rel="stylesheet" href="http://imakewebthings.com/deck.js/css/home.css"> -->
+
+<!-- Transition theme. More available in /themes/transition/ or create your own. -->
+<link rel="stylesheet" media="screen" href="themes/transition/horizontal-slide.css">
+
+<!-- Basic black and white print styles -->
+<link rel="stylesheet" media="print" href="core/print.css">
+
+<!-- Required Modernizr file -->
+<script src="modernizr.custom.js"></script>
+
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>$(function () {
+sagecell.makeSagecell({
+inputLocation: 'div.compute',
+linked: true,
+/* hide: ['evalButton'], */
+evalButtonText: '->'});
+});
+</script>
+<link rel="stylesheet" href="css/fira_code.css">
+<link rel="stylesheet" media="screen" href="css/main.css">
+</head>
+<body class="home">
+<div class="deck-container">
+
+<!-- Begin slides. Just make elements with a class of slide. -->
+
+<section id="titleslide" class="slide">
+<h1>Prime numbers<br>&amp;<br>Cryptography</h1>
+<footer><em>by</em> Johan Commelin</footer>
+</section>
+
+<section class="slide">
+<h1>What is crypto?</h1>
+</section>
+
+<section class="slide">
+<h2>Alice &amp; Bob, and evil Eve</h2>
+<ul>
+<li class="slide">📝 Alice has message: $M$
+<li class="slide">🔐 Alice encrypts: $M_E = \mathrm{Enc}(M)$
+<li class="slide">📮 Alice sends $M_E$ to Bob
+<li class="slide">👹 Eve can not read $M_E$
+<li class="slide">🔓 Bob decrypts: $M = \mathrm{Dec}(M_E)$
+<li class="slide">📰 Bob reads $M$
+<li class="slide">🎉 Epic win!
+</ul>
+<h3 class="slide">Let's build this system! 🛠️ 💪</h3>
+<ul>
+<li class="slide warning">⛔ Don't use this bug-ridden example at home!
+</ul>
+</section>
+
+<section class="slide">
+<h2>Computations with numbers</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>Modular arithmetic<br>
+(numbers on a clock)</h2>
+We can compute on a clock with $12$ numbers.
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>Prime numbers</h2>
+<p class="slide"><strong>Definition.</strong>
+A number $p > 1$ is called a <em>prime number</em>
+if it is only divisible by $1$ and itself.</p>
+<div class="compute slide"><script type="text/x-sage"></script></div>
+</section>
+ 
+<section class="slide">
+<h2>Prime numbers</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>The clock of a prime number</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>Fermat's little theorem</h2>
+<p class="slide"><strong>Theorem.</strong>
+Let $p$ be a prime number, and let $a$ be a number
+on the clock with $p$ numbers.
+Then $a^p = a$.</p>
+<div class="compute slide"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>Fermat's little theorem</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<!-- <section class="slide"> -->
+<!-- <h2>Why is this cool?</h2> -->
+<!-- <p class="slide">Let $p$ be a very big prime number. -->
+<!-- Alice has a secret number $m$ on the clock with $p$ numbers.</p> -->
+<!-- <p class="slide">If $p = a \cdot b$, then -->
+<!-- $$ (m^a)^b = m^{a \cdot b} = m^p = m. $$</p> -->
+<!-- <p class="slide">Alice knows $a$, and Bob knows $b$; and we win!<p> -->
+<!-- <p class="slide">Alice can send $m^a$, -->
+<!-- and only Bob will know how to compute $m$ from it.</p> -->
+<!-- <p class="slide">Except: there are some problems.</p> -->
+<!-- <p class="slide">The number $p$ is prime. -->
+<!-- So we only have $p = 1 \cdot p = p \cdot 1$.</p> -->
+<!-- <p class="slide">And how would Alice and Bob agree on $a$ and $b$?</p> -->
+<!-- </section> -->
+
+<!-- <section class="slide"> -->
+<!-- <h2>How to fix this</h2> -->
+<!-- <p class="slide">We will have to be a bit more careful.<br> -->
+<!-- But we can make this work!</p> -->
+<!-- <p class="slide">Alice and Bob can use -->
+<!-- Fermat's little theorem to compute a shared secret $K$.</p> -->
+<!-- <p class="slide">Afterwards, they can use $K$ as a key -->
+<!-- in other cryptographic algorithms.</p> -->
+<!-- </section> -->
+
+<section class="slide">
+<h2>Diffie&ndash;Hellman key exchange</h2>
+<p class="slide">Let $p$ be a big prime number.</p>
+<p class="slide">Alice and Bob agree on some number $g$
+on the clock with $p$ numbers.</p>
+<p class="slide">Eve is allowed to know $p$ and $g$.</p>
+<p class="slide">Alice chooses a number $a$ and computes $g^a$.</p>
+<p class="slide">Bob chooses a number $b$ and computes $g^b$.</p>
+<p class="slide">Alice sends $g^a$ to Bob, and Bob sends $g^b$ to Alice.</p>
+<p class="slide">Now Alice computes $(g^b)^a = g^{a \cdot b}$
+and Bob computes $(g^a)^b = g^{a \cdot b}$.</p>
+<p class="slide">Alice and Bob know $K = g^{a \cdot b}$.<br>
+But for Eve it is very hard to compute $K$.</p>
+</section>
+
+<section class="slide">
+<h2>What does Eve know?</h2>
+<p class="slide">
+Eve can read all the messages that Alice and Bob exchange.<br>
+So Eve knows:
+<span class="slide">$p$,</span>
+<span class="slide">$g$,</span>
+<span class="slide">$g^a$,</span>
+<span class="slide">and $g^b$.</span>
+</p>
+<p class="slide">Because Eve knows $g$ and $g^a$ (or $g^b$),<br>
+she can try to compute $a$ (or $b$).</p>
+<p class="slide">But after several decades,<br>
+we still don't know a fast way to do that!</p>
+<p class="slide">If $p$ is big (for example, $p$ has 100 digits),<br>
+then computing $g^a$ from $g$ and $a$ is not hard.<br>
+But computing $a$ from $g$ and $g^a$ is <em>currently</em> impossible.</p>
+<p class="slide">This is called the <em>Discrete Logarithm</em> problem.</p>
+<p class="slide warning">On a quantum computer,
+there is a fast computation of discrete logarithms.</p>
+</section>
+
+<section class="slide">
+<h2>Implementation</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>Generate inputs</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>Compute the key</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>Using the key</h2>
+<p class="slide">Alice and Bob now have a shared secret $K$.</p>
+<p class="slide">How do they use it?</p>
+<p class="slide">We will build a simple encryption/decryption function.</p>
+</section>
+
+<section class="slide">
+<h2>From text to numbers</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>From text to numbers</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>Generating "random" numbers</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>Encryption</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>Decryption</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section class="slide">
+<h2>The final countdown</h2>
+<div class="compute"><script type="text/x-sage"></script></div>
+</section>
+
+<section id="finalslide" class="slide">
+<h2>How to break cryptography</h2>
+<div class="slide">
+<img src="https://imgs.xkcd.com/comics/security.png">
+</div>
+<footer><span class="slide">The End.
+	<em>Thanks for watching!</em></span></footer>
+</section>
+
+
+
+<!-- End slides. -->
+</div>
+
+<!-- Required JS files. -->
+<script src="jquery.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/step/deck.step.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+$(function() {
+$.deck('.slide');
+});
+</script>
+</body>
+</html>
