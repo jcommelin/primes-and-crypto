@@ -45,7 +45,7 @@ evalButtonText: '->'});
 <!-- Begin slides. Just make elements with a class of slide. -->
 
 <section id="titleslide" class="slide">
-	<h1>Prime numbers<br>&amp;<br>Cryptography</h1>
+<h1>Prime numbers<br>&amp;<br>Cryptography</h1>
 <footer><em>by</em> Johan Commelin</footer>
 </section>
 
@@ -65,15 +65,9 @@ evalButtonText: '->'});
 <li class="slide">🎉 Epic win!
 </ul>
 <h3 class="slide">Let's build this system! 🛠️ 💪</h3>
-</section>
-
-<section class="slide">
-<h2>From text to numbers</h2>
-<div class="compute"><script type="text/x-sage">
-# "Hello, world!"
-
-def text_to_numbers(text):
-</script></div>
+<ul>
+<li class="slide warning">⛔ Don't use this bug-ridden example at home!
+</ul>
 </section>
 
 <section class="slide">
@@ -165,34 +159,34 @@ print L = primes_first_n(25)
 </script></div>
 </section>
 
-<section class="slide">
-<h2>Why is this cool?</h2>
-<p class="slide">Let $p$ be a very big prime number.
-Alice has a secret number $m$ on the clock with $p$ numbers.</p>
-<p class="slide">If $p = a \cdot b$, then
-$$ (m^a)^b = m^{a \cdot b} = m^p = m. $$</p>
-<p class="slide">Alice knows $a$, and Bob knows $b$; and we win!<p>
-<p class="slide">Alice can send $m^a$,
-and only Bob will know how to compute $m$ from it.</p>
-<p class="slide">Except: there are some problems.</p>
-<p class="slide">The number $p$ is prime.
-So we only have $p = 1 \cdot p = p \cdot 1$.</p>
-<p class="slide">And how would Alice and Bob agree on $a$ and $b$?</p>
-</section>
+<!-- <section class="slide"> -->
+<!-- <h2>Why is this cool?</h2> -->
+<!-- <p class="slide">Let $p$ be a very big prime number. -->
+<!-- Alice has a secret number $m$ on the clock with $p$ numbers.</p> -->
+<!-- <p class="slide">If $p = a \cdot b$, then -->
+<!-- $$ (m^a)^b = m^{a \cdot b} = m^p = m. $$</p> -->
+<!-- <p class="slide">Alice knows $a$, and Bob knows $b$; and we win!<p> -->
+<!-- <p class="slide">Alice can send $m^a$, -->
+<!-- and only Bob will know how to compute $m$ from it.</p> -->
+<!-- <p class="slide">Except: there are some problems.</p> -->
+<!-- <p class="slide">The number $p$ is prime. -->
+<!-- So we only have $p = 1 \cdot p = p \cdot 1$.</p> -->
+<!-- <p class="slide">And how would Alice and Bob agree on $a$ and $b$?</p> -->
+<!-- </section> -->
 
-<section class="slide">
-<h2>How to fix this</h2>
-<p class="slide">We will have to be a bit more careful.<br>
-But we can make this work!</p>
-<p class="slide">Alice and Bob can use
-Fermat's little theorem to compute a shared secret $K$.</p>
-<p class="slide">Afterwards, they can use $K$ as a key
-in other cryptographic algorithms.</p>
-</section>
+<!-- <section class="slide"> -->
+<!-- <h2>How to fix this</h2> -->
+<!-- <p class="slide">We will have to be a bit more careful.<br> -->
+<!-- But we can make this work!</p> -->
+<!-- <p class="slide">Alice and Bob can use -->
+<!-- Fermat's little theorem to compute a shared secret $K$.</p> -->
+<!-- <p class="slide">Afterwards, they can use $K$ as a key -->
+<!-- in other cryptographic algorithms.</p> -->
+<!-- </section> -->
 
 <section class="slide">
 <h2>Diffie&ndash;Hellman key exchange</h2>
-<p class="slide">Like before, let $p$ be a big prime number.</p>
+<p class="slide">Let $p$ be a big prime number.</p>
 <p class="slide">Alice and Bob agree on some number $g$
 on the clock with $p$ numbers.</p>
 <p class="slide">Eve is allowed to know $p$ and $g$.</p>
@@ -243,7 +237,7 @@ print "Implementation is done!"
 </section>
 
 <section class="slide">
-<h2>Implementation</h2>
+<h2>Generate secrets</h2>
 <div class="compute"><script type="text/x-sage">
 p = random_prime(10^11,False,10^10)
 print "Prime number: p =", p
@@ -257,7 +251,7 @@ print "Bob secret:   b =", b
 </section>
 
 <section class="slide">
-<h2>Implementation</h2>
+<h2>Compute the key</h2>
 <div class="compute"><script type="text/x-sage">
 ga = Diffie_Hellman_send(p,g,a)
 print "Alice sends ga =", ga
@@ -270,7 +264,104 @@ print "Are those keys the same?", Ka == Kb
 </script></div>
 </section>
 
+<section class="slide">
+<h2>Using the key</h2>
+<p class="slide">Alice and Bob now have a shared secret $K$.</p>
+<p class="slide">How do they use it?</p>
+<p class="slide">We will build a simple encryption/decryption function.</p>
+</section>
 
+<section class="slide">
+<h2>From text to numbers</h2>
+<div class="compute"><script type="text/x-sage">
+msg = "Hello, world!"
+print msg
+print ord('A'), ord('1'), ord(msg[0]), ord(msg[1])
+print chr(97)
+</script></div>
+</section>
+
+<section class="slide">
+<h2>From text to numbers</h2>
+<div class="compute"><script type="text/x-sage">
+def text_to_numbers(text):
+    return [ord(c) for c in text]
+
+def numbers_to_text(numbers):
+    s = [chr(n) for n in numbers]
+    return ''.join(s)
+
+print msg
+ns = text_to_numbers(msg)
+print ns
+print numbers_to_text(ns)
+</script></div>
+</section>
+
+<section class="slide">
+<h2>Generating "random" numbers</h2>
+<div class="compute"><script type="text/x-sage">
+# WARNING: THIS IS VERY VERY INSECURE!!!
+def generate_random_number(seed):
+    return (seed * 67) % 256
+
+rns = [generate_random_number(i) for i in range(10)]
+print rns
+</script></div>
+</section>
+
+<section class="slide">
+<h2>Encryption</h2>
+<div class="compute"><script type="text/x-sage">
+def encrypt(key,text):
+    r = generate_random_number(key)
+    numbers = text_to_numbers(text)
+    result = []
+    for n in numbers:
+        result += [(n + r) % 256]
+	r = generate_random_number(r)
+    return result
+
+print "Encryption function defined."
+</script></div>
+</section>
+
+<section class="slide">
+<h2>Decryption</h2>
+<div class="compute"><script type="text/x-sage">
+def decrypt(key,numbers):
+    r = generate_random_number(key)
+    result = []
+    for n in numbers:
+        result += [(n - r) % 256]
+	r = generate_random_number(r)
+    return numbers_to_text(result)
+
+print "Decryption function defined."
+</script></div>
+</section>
+
+<section class="slide">
+<h2>The final countdown</h2>
+<div class="compute"><script type="text/x-sage">
+Ka = int(Ka)
+Kb = int(Kb)
+print "The message: ", msg
+encmsg = encrypt(Ka, msg)
+print "Alice sends: ", encmsg
+decmsg = decrypt(Kb, encmsg)
+print "Bob receives:", decmsg
+</script></div>
+</section>
+
+<section id="finalslide" class="slide">
+<h2>How to break cryptography</h2>
+<div class="slide">
+<img src="https://imgs.xkcd.com/comics/security.png">
+</div>
+<footer><span class="slide">The End.
+	<em>Thanks for watching!</em></span></footer>
+</section>
 
 
 

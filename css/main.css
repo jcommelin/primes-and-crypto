@@ -400,7 +400,7 @@ a:hover, a:focus {
 .deck-menu .deck-current, .no-touch .deck-menu .slide:hover {
   background: #ddf;
 }
-#titleslide footer {
+#titleslide footer, #finalslide footer {
   position: absolute;
   bottom: 1em;
   right: 1em;
@@ -430,4 +430,7 @@ a:hover, a:focus {
 }
 ul li {
   list-style: none;
+}
+.warning {
+  color: #c00;
 }
