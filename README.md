@@ -1,9 +1,9 @@
-# mathetage2018
-Slides for Mathetage 2018 at Uni Freiburg
+# primes-and-crypto
+Slides for Mathetage at Uni Freiburg (2018, 2022)
 
 Topic: prime numbers and cryptography. Live coding in Sage.
 
-Try it online: https://jcommelin.github.io/mathetage2018/
+Try it online: https://jcommelin.github.io/primes-and-crypto
 
 ## Acknowledgements
 Kudos to the people behind `deck.js`, the Sage Cell server, and Mathjax.
