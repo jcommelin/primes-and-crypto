@@ -74,13 +74,13 @@ evalButtonText: '->'});
 <h2>Computations with numbers</h2>
 <div class="compute"><script type="text/x-sage">
 a = 5
-print "a = %d" % a ## Explain placeholders
+print("a = %d" % a)## Explain placeholders
 for text in ["world", "Bob"]:
-    print "Hello, %s!" % text
+    print("Hello, %s!" % text)
 a += 3
-print "a =", a
-print 3 * 5
-print 3 + 5
+print("a =", a)
+print(3 * 5)
+print(3 + 5)
 </script></div>
 </section>
 
@@ -92,7 +92,7 @@ We can compute on a clock with $12$ numbers.
 clock = Zmod(12)
 a = clock(7)
 b = clock(8)
-print a + b
+print(a + b)
 </script></div>
 </section>
 
@@ -103,10 +103,10 @@ A number $p > 1$ is called a <em>prime number</em>
 if it is only divisible by $1$ and itself.</p>
 <div class="compute slide"><script type="text/x-sage">
 P = Primes()
-print P
+print(P)
 ## --- --- --- --- --- ---
-print primes_first_n(25)
-print random_prime(10^11, False, 10^10)
+print(primes_first_n(25))
+print(random_prime(10^11, False, 10^10))
 </script></div>
 </section>
  
@@ -114,10 +114,10 @@ print random_prime(10^11, False, 10^10)
 <h2>Prime numbers</h2>
 <div class="compute"><script type="text/x-sage">
 for n in [5,37,100]:
-    print "Is %3d prime? %s" % (n, n in P)
+    print("Is %3d prime? %s" % (n, n in P))
 ## --- --- --- --- --- ---
 for n in [57,91]:
-    print "Factor %d:    %s" % (n, factor(n))
+    print("Factor %d:    %s" % (n, factor(n)))
 </script></div>
 </section>
 
@@ -125,9 +125,9 @@ for n in [57,91]:
 <h2>The clock of a prime number</h2>
 <div class="compute"><script type="text/x-sage">
 clock = Zmod(7)
-print '*', [y for y in clock]
+print('*', [y for y in clock])
 for x in clock:
-    print x, [x * y for y in clock]
+    print(x, [x * y for y in clock])
 </script></div>
 </section>
 
@@ -140,10 +140,10 @@ Then $a^p = a$.</p>
 <div class="compute slide"><script type="text/x-sage">
 clock = Zmod(5)
 for x in clock:
-    print "%d^5 = %d" % (x, x^5)
+    print("%d^5 = %d" % (x, x^5))
 ## --- --- --- --- --- ---
 clock = Zmod(97)
-print "Check p = 97:", all([x == x^97 for x in clock])
+print("Check p = 97:", all([x == x^97 for x in clock]))
 </script></div>
 </section>
 
@@ -156,36 +156,11 @@ for n in range(2,100):
     if all([x == x^n for x in clock]):
         L = L + [n]
 ## --- --- --- --- --- ---
-print L
+print(L)
 ## --- --- --- --- --- ---
-print L == primes_first_n(25)
+print(L == primes_first_n(25))
 </script></div>
 </section>
-
-<!-- <section class="slide"> -->
-<!-- <h2>Why is this cool?</h2> -->
-<!-- <p class="slide">Let $p$ be a very big prime number. -->
-<!-- Alice has a secret number $m$ on the clock with $p$ numbers.</p> -->
-<!-- <p class="slide">If $p = a \cdot b$, then -->
-<!-- $$ (m^a)^b = m^{a \cdot b} = m^p = m. $$</p> -->
-<!-- <p class="slide">Alice knows $a$, and Bob knows $b$; and we win!<p> -->
-<!-- <p class="slide">Alice can send $m^a$, -->
-<!-- and only Bob will know how to compute $m$ from it.</p> -->
-<!-- <p class="slide">Except: there are some problems.</p> -->
-<!-- <p class="slide">The number $p$ is prime. -->
-<!-- So we only have $p = 1 \cdot p = p \cdot 1$.</p> -->
-<!-- <p class="slide">And how would Alice and Bob agree on $a$ and $b$?</p> -->
-<!-- </section> -->
-
-<!-- <section class="slide"> -->
-<!-- <h2>How to fix this</h2> -->
-<!-- <p class="slide">We will have to be a bit more careful.<br> -->
-<!-- But we can make this work!</p> -->
-<!-- <p class="slide">Alice and Bob can use -->
-<!-- Fermat's little theorem to compute a shared secret $K$.</p> -->
-<!-- <p class="slide">Afterwards, they can use $K$ as a key -->
-<!-- in other cryptographic algorithms.</p> -->
-<!-- </section> -->
 
 <section class="slide">
 <h2>Diffie&ndash;Hellman key exchange</h2>
@@ -237,7 +212,7 @@ def Diffie_Hellman_receive(p,gb,a):
     gb = clock(gb)
     return gb^a
 
-print "Implementation is done!"
+print("Implementation is done!")
 </script></div>
 </section>
 
@@ -245,14 +220,14 @@ print "Implementation is done!"
 <h2>Generate inputs</h2>
 <div class="compute"><script type="text/x-sage">
 p = random_prime(10^11,False,10^10)
-print "Prime number: p =", p
+print("Prime number: p =", p)
 g = ZZ.random_element(2,p)
-print "Shared base:  g =", g
+print("Shared base:  g =", g)
 ## --- --- --- --- --- ---
 a = ZZ.random_element(2,p)
-print "Alice secret: a =", a
+print("Alice secret: a =", a)
 b = ZZ.random_element(2,p)
-print "Bob secret:   b =", b
+print("Bob secret:   b =", b)
 </script></div>
 </section>
 
@@ -260,14 +235,14 @@ print "Bob secret:   b =", b
 <h2>Compute the key</h2>
 <div class="compute"><script type="text/x-sage">
 ga = Diffie_Hellman_send(p,g,a)
-print "Alice sends ga =", ga
+print("Alice sends ga =", ga)
 gb = Diffie_Hellman_send(p,g,b)
-print "Bob sends   gb =", gb
+print("Bob sends   gb =", gb)
 ## --- --- --- --- --- ---
 Ka = Diffie_Hellman_receive(p,gb,a)
 Kb = Diffie_Hellman_receive(p,ga,b)
-print "Alice and Bob compute", Ka, "and", Kb
-print "Are those keys the same?", Ka == Kb
+print("Alice and Bob compute", Ka, "and", Kb)
+print("Are those keys the same?", Ka == Kb)
 </script></div>
 </section>
 
@@ -282,9 +257,9 @@ print "Are those keys the same?", Ka == Kb
 <h2>From text to numbers</h2>
 <div class="compute"><script type="text/x-sage">
 msg = "Hello, world!"
-print msg
-print ord('A'), ord('1'), ord(msg[0]), ord(msg[1])
-print chr(97)
+print(msg)
+print(ord('A'), ord('1'), ord(msg[0]), ord(msg[1]))
+print(chr(97))
 </script></div>
 </section>
 
@@ -298,10 +273,10 @@ def numbers_to_text(numbers):
     s = [chr(n) for n in numbers]
     return ''.join(s)
 ## --- --- --- --- --- ---
-print msg
+print(msg)
 ns = text_to_numbers(msg)
-print ns
-print numbers_to_text(ns)
+print(ns)
+print(numbers_to_text(ns))
 </script></div>
 </section>
 
@@ -314,7 +289,7 @@ def generate_random_number(seed):
     return clock(seed * 67)
 ## --- --- --- --- --- ---
 rns = [generate_random_number(i) for i in range(10)]
-print rns
+print(rns)
 </script></div>
 </section>
 
@@ -331,7 +306,7 @@ def encrypt(key,text):
 	r = generate_random_number(r)
     return result
 
-print "Encryption function defined."
+print("Encryption function defined.")
 </script></div>
 </section>
 
@@ -347,7 +322,7 @@ def decrypt(key,numbers):
 	r = generate_random_number(r)
     return numbers_to_text(result)
 
-print "Decryption function defined."
+print("Decryption function defined.")
 </script></div>
 </section>
 
@@ -357,11 +332,11 @@ print "Decryption function defined."
 Ka = int(Ka) ## Need to turn a number on the clock
 Kb = int(Kb) ## with p numbers into a normal number
 ## --- --- --- --- --- ---
-print "The message: ", msg
+print("The message: ", msg)
 encmsg = encrypt(Ka, msg)
-print "Alice sends: ", encmsg
+print("Alice sends: ", encmsg)
 decmsg = decrypt(Kb, encmsg)
-print "Bob receives:", decmsg
+print("Bob receives:", decmsg)
 </script></div>
 </section>
 
