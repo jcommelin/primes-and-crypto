@@ -153,7 +153,7 @@ print("Check p = 97:", all([x^97 == x for x in clock]))
 L = []
 for n in range(2,100):
     clock = Zmod(n)
-    if all([x == x^n for x in clock]):
+    if all([x^n == x for x in clock]):
         L = L + [n]
 ## --- --- --- --- --- ---
 print(L)
