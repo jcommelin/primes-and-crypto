@@ -322,7 +322,7 @@ def decrypt(key,numbers):
     result = []
     for n in numbers:
         result += [clock(n - r)]
-	r = generate_random_number(r)
+        r = generate_random_number(r)
     return numbers_to_text(result)
 
 print("Decryption function defined.")
@@ -338,6 +338,7 @@ Kb = int(Kb) ## with p numbers into a normal number
 print("The message: ", msg)
 encmsg = encrypt(Ka, msg)
 print("Alice sends: ", encmsg)
+print("Eve sees:    ", numbers_to_text(encmsg))
 decmsg = decrypt(Kb, encmsg)
 print("Bob receives:", decmsg)
 </script></div>
