@@ -298,6 +298,7 @@ print(rns)
 <section class="slide">
 <h2>Encryption</h2>
 <div class="compute"><script type="text/x-sage">
+# WARNING: THIS IS VERY VERY INSECURE!!!
 def encrypt(key,text):
     clock = Zmod(256)
     r = generate_random_number(key)
@@ -305,7 +306,7 @@ def encrypt(key,text):
     result = []
     for n in numbers:
         result += [clock(n + r)]
-	r = generate_random_number(r)
+        r = generate_random_number(r)
     return result
 
 print("Encryption function defined.")
